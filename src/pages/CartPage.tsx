@@ -16,7 +16,7 @@ const CartPage = () => {
         </div>
         <div className="border-[1px] border-gray-200 p-5 md:w-[536px]">
           <h1 className="font-bold">Order Summary</h1>
-          <form className="my-5">
+          <div className="my-5">
             <label htmlFor="PromoCode">Discount Code / Promo Code</label>
             <input
               className="mb-5 flex h-12 w-full rounded-md border bg-transparent px-3 py-1 text-sm shadow-sm transition-colors focus-visible:outline-none focus-visible:ring-1 disabled:cursor-not-allowed disabled:opacity-50"
@@ -49,13 +49,10 @@ const CartPage = () => {
                 <h1 className="font-bold">$ {cartStore.TotalPrice}</h1>
               </div>
             </div>
-            <button
-              className="mt-5 w-full rounded-lg bg-black py-2 text-white"
-              type="submit"
-            >
+            <button className="mt-5 w-full rounded-lg bg-black py-2 text-white">
               Checkout
             </button>
-          </form>
+          </div>
         </div>
       </div>
     );

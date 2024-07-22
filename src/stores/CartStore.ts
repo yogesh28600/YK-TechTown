@@ -4,9 +4,13 @@ import { CartProduct } from "../Types/CartProduct";
 export default class CartStore {
   products: CartProduct[] = [];
   TotalPrice: number = 0;
+  TotalItems: number = 0;
 
   constructor() {
     makeAutoObservable(this);
+  }
+  calculateTotalItems() {
+    this.TotalItems = this.products.length;
   }
   calculateTotal(): number {
     let price: number = 0;
@@ -24,14 +28,16 @@ export default class CartStore {
       this.products = [...this.products, newProd];
     }
     this.TotalPrice = this.calculateTotal();
+    this.calculateTotalItems();
   }
   removeProduct(id: number): void {
     const idx = this.products.findIndex((prod) => prod.id === id);
     this.products.splice(idx, 1);
+    this.TotalItems = this.products.length;
+    this.calculateTotalItems();
   }
   changeQuantity(id: number, qty: number) {
     const idx = this.products.findIndex((prod) => prod.id === id);
     this.products[idx].quantity = qty;
-    this.TotalPrice = this.calculateTotal();
   }
 }
