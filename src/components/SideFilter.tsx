@@ -16,8 +16,8 @@ const SideFilter = () => {
       <div
         className={`scroll-hidden max-h-[330px] overflow-y-scroll ${brandMenu ? "block" : "hidden"}`}
       >
-        {Brands.map((brand) => (
-          <div className="flex items-center gap-1">
+        {Brands.map((brand, index) => (
+          <div key={index} className="flex items-center gap-1">
             <input type="checkbox" name={brand} />
             <label htmlFor="Apple">{brand}</label>
           </div>

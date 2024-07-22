@@ -51,7 +51,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
         $ {product.currentPrice}
       </h1>
       <NavLink
-        to="cart"
+        to="/cart"
         className="rounded-lg bg-black px-10 py-2 text-white"
         onClick={() => buynowHandle()}
       >

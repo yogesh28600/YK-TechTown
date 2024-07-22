@@ -29,4 +29,9 @@ export default class CartStore {
     const idx = this.products.findIndex((prod) => prod.id === id);
     this.products.splice(idx, 1);
   }
+  changeQuantity(id: number, qty: number) {
+    const idx = this.products.findIndex((prod) => prod.id === id);
+    this.products[idx].quantity = qty;
+    this.TotalPrice = this.calculateTotal();
+  }
 }

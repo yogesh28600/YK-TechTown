@@ -26,7 +26,7 @@ const ProductsPage = () => {
           </div>
           <div className="my-5 grid grid-cols-2 gap-5 md:grid-cols-3">
             {viewProductsStore.products.map((product) => (
-              <ProductCard product={product} />
+              <ProductCard key={product.id} product={product} />
             ))}
           </div>
         </div>
