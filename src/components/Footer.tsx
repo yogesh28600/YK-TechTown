@@ -1,6 +1,6 @@
 const Footer = () => {
   return (
-    <div className="grid w-full grid-cols-1 items-center justify-center gap-5 bg-black px-32 py-20 text-white md:grid-cols-3">
+    <div className="grid w-full grid-cols-3 items-center justify-center gap-5 bg-black px-4 py-2 text-xs text-white md:px-32 md:py-20 md:text-base">
       <div>
         <h1 className="font-bold">TechTown</h1>
         <p>
