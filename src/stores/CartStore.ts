@@ -39,5 +39,6 @@ export default class CartStore {
   changeQuantity(id: number, qty: number) {
     const idx = this.products.findIndex((prod) => prod.id === id);
     this.products[idx].quantity = qty;
+    this.calculateTotal();
   }
 }
