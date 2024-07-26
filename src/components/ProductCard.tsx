@@ -5,6 +5,7 @@ import { observer } from "mobx-react-lite";
 import { useStore } from "../stores/Store";
 import { CartProduct } from "../Types/CartProduct";
 import { NavLink } from "react-router-dom";
+import { auth } from "../Firebase/FirebaseConfig";
 interface ProductCardProps {
   product: ViewProduct;
 }
@@ -13,24 +14,26 @@ const ProductCard = ({ product }: ProductCardProps) => {
 
   //On click buy now button the product will be added to cart
   function buynowHandle(): void {
-    const cartProduct: CartProduct = { ...product, quantity: 1 };
-    UserStore.cart.AddToCart(cartProduct);
-    //------------------------end----------------------------//
+    if (auth.currentUser) {
+      const cartProduct: CartProduct = { ...product, quantity: 1 };
+      UserStore.cart.AddToCart(cartProduct);
+    }
+  }
+  //------------------------end----------------------------//
+  function AddToWishlistHandle() {
+    if (auth.currentUser) {
+      UserStore.wishlist.AddToWishlist(product);
+      viewProductsStore.ToggleWishlist(
+        product.id,
+        product.isWishlisted ? product.isWishlisted : false,
+      );
+    }
   }
   return (
     <div className="relative flex h-[432px] max-w-[266px] flex-col items-center justify-center gap-y-4 rounded-lg bg-gray-200 px-5">
       <button className="absolute right-4 top-4">
         {!product.isWishlisted ? (
-          <CiHeart
-            size={30}
-            onClick={() => {
-              UserStore.wishlist.AddToWishlist(product);
-              viewProductsStore.ToggleWishlist(
-                product.id,
-                product.isWishlisted ? product.isWishlisted : false,
-              );
-            }}
-          />
+          <CiHeart size={30} onClick={() => AddToWishlistHandle()} />
         ) : (
           <FaHeart
             size={25}
