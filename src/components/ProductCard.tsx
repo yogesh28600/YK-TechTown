@@ -9,12 +9,12 @@ interface ProductCardProps {
   product: ViewProduct;
 }
 const ProductCard = ({ product }: ProductCardProps) => {
-  const { viewProductsStore, wishlistStore, cartStore } = useStore();
+  const { viewProductsStore, UserStore } = useStore();
 
   //On click buy now button the product will be added to cart
   function buynowHandle(): void {
     const cartProduct: CartProduct = { ...product, quantity: 1 };
-    cartStore.AddToCart(cartProduct);
+    UserStore.cart.AddToCart(cartProduct);
     //------------------------end----------------------------//
   }
   return (
@@ -24,7 +24,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
           <CiHeart
             size={30}
             onClick={() => {
-              wishlistStore.AddToWishlist(product);
+              UserStore.wishlist.AddToWishlist(product);
               viewProductsStore.ToggleWishlist(
                 product.id,
                 product.isWishlisted ? product.isWishlisted : false,
@@ -36,7 +36,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
             size={25}
             color="red"
             onClick={() => {
-              wishlistStore.RemoveFromWishlist(product.id);
+              UserStore.wishlist.RemoveFromWishlist(product.id);
               viewProductsStore.ToggleWishlist(
                 product.id,
                 product.isWishlisted ? product.isWishlisted : false,

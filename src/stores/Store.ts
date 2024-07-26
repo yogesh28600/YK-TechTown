@@ -1,21 +1,18 @@
 import { createContext, useContext } from "react";
 import ProductStore from "./ProductsStore";
 import ViewProductsStore from "./ViewProductsStore";
-import WishlistStore from "./WishlistStore";
-import CartStore from "./CartStore";
+import UserStore from "./UserStore";
 
 interface Store {
   productStore: ProductStore;
   viewProductsStore: ViewProductsStore;
-  wishlistStore: WishlistStore;
-  cartStore: CartStore;
+  UserStore: UserStore;
 }
 
 export const store: Store = {
   productStore: new ProductStore(),
   viewProductsStore: new ViewProductsStore(),
-  wishlistStore: new WishlistStore(),
-  cartStore: new CartStore(),
+  UserStore: new UserStore(),
 };
 
 export const StoreContext = createContext(store);

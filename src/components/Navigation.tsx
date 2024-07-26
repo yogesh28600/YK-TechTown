@@ -4,8 +4,10 @@ import { GoPerson } from "react-icons/go";
 import { Link, NavLink } from "react-router-dom";
 import { useStore } from "../stores/Store";
 import { observer } from "mobx-react-lite";
+import { signOut } from "firebase/auth";
+import { auth } from "../Firebase/FirebaseConfig";
 const Navigation = () => {
-  const { cartStore } = useStore();
+  const { UserStore } = useStore();
   return (
     <div className="flex w-full justify-center bg-white">
       <div className="font-roboto flex w-full items-center justify-between gap-10 px-5 py-4 md:justify-center md:px-0">
@@ -33,14 +35,28 @@ const Navigation = () => {
             <NavLink to="cart">
               <IoCartOutline />
             </NavLink>
-            {cartStore.TotalItems > 0 && (
+            {UserStore.cart.TotalItems > 0 && (
               <div className="absolute right-[-6px] top-[-6px] rounded-full bg-red-500 p-1 text-[0.2em] text-white">
-                {cartStore.TotalItems}
+                {UserStore.cart.TotalItems}
               </div>
             )}
           </li>
           <li>
-            <GoPerson />
+            {UserStore.userId ? (
+              <button
+                className="flex items-center gap-1"
+                onClick={() => {
+                  signOut(auth);
+                  UserStore.removeUser();
+                }}
+              >
+                <GoPerson /> Logout
+              </button>
+            ) : (
+              <Link className="flex items-center gap-1" to="/signin">
+                <GoPerson /> Sign in/Sign up
+              </Link>
+            )}
           </li>
         </ul>
       </div>

@@ -9,12 +9,12 @@ interface CartProductProps {
   product: CartProduct;
 }
 const CartItem = ({ product }: CartProductProps) => {
-  const { cartStore } = useStore();
+  const { UserStore } = useStore();
   const [quantity, setQuantity] = useState<number>(product.quantity);
   function ChangeQuantityHandler(e: React.ChangeEvent<HTMLInputElement>) {
     const qty = +e.target.value;
     setQuantity(qty);
-    cartStore.changeQuantity(product.id, qty);
+    UserStore.cart.changeQuantity(product.id, qty);
   }
   return (
     <div
@@ -34,7 +34,7 @@ const CartItem = ({ product }: CartProductProps) => {
               onClick={() => {
                 if (quantity != 0) {
                   setQuantity(quantity - 1);
-                  cartStore.changeQuantity(product.id, quantity - 1);
+                  UserStore.cart.changeQuantity(product.id, quantity - 1);
                 }
               }}
             >
@@ -50,7 +50,7 @@ const CartItem = ({ product }: CartProductProps) => {
             <button
               onClick={() => {
                 setQuantity(quantity + 1);
-                cartStore.changeQuantity(product.id, quantity + 1);
+                UserStore.cart.changeQuantity(product.id, quantity + 1);
               }}
             >
               <IoAddOutline />
@@ -61,7 +61,7 @@ const CartItem = ({ product }: CartProductProps) => {
           </div>
           <button
             className="ms-3"
-            onClick={() => cartStore.removeProduct(product.id)}
+            onClick={() => UserStore.cart.removeProduct(product.id)}
           >
             <IoMdClose size={20} />
           </button>
