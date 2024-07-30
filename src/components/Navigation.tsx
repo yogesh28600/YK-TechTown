@@ -54,7 +54,8 @@ const Navigation = () => {
               </button>
             ) : (
               <Link className="flex items-center gap-1" to="/signin">
-                <GoPerson /> Sign in/Sign up
+                <GoPerson />{" "}
+                <span className="hidden md:block">Sign in/Sign up</span>
               </Link>
             )}
           </li>
